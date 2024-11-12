@@ -2,19 +2,17 @@
     <head>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/aframe/1.0.4/aframe.min.js"></script>
 
-        <!-- <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js@master/aframe/build/aframe-ar-nft.js"></script> -->
-        <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js@master/aframe/build/aframe-ar.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js@master/aframe/build/aframe-ar-nft.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js@master/aframe/build/aframe-ar.js"></script> -->
     </head>
     <body>
         <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: true;">
-            <a-marker
+            <a-nft
                 url="pattern-nft.patt"
                 smooth="true"
-                smoothCount="10"
-                smoothTolerance="0.01"
-                smoothThreshold="0.05"
+
             >
-                <a-plane
+                <!-- <a-plane
                     position="-0.5 -0.5 0"
                     rotation="-90 0 0"
                     width="0.5"
@@ -24,7 +22,7 @@
                     event-set__click="_event: click; color: #00ccff"
                     onclick="window.open('https://t.me/Newgentle', '_blank')"
                 >
-                </a-plane>
+                </a-plane> -->
                 <!--         <a-text
           value="Telegram"
           position="-1 0.7 0.01"
@@ -69,14 +67,14 @@
         ></a-text> -->
 
                 <!-- 2D Плоскость с фото -->
-                <a-image
+                <!-- <a-image
                     id="image1"
                     position="0 -0.5 0"
                     rotation="-90 0 0"
                     width="0.5"
                     height="0.5"
                     src="https://cdn.glitch.global/fd29b778-4723-4fa7-a606-70ad55f37f0e/Yodgora.png?v=1729422697726"
-                ></a-image>
+                ></a-image> -->
 
                 <!-- Имя -->
                 <!--         <a-text
@@ -101,7 +99,8 @@
           scale="0.8 0.8 0.8"
           color="#000000"
         ></a-text> -->
-            </a-marker>
+                <a-box position="0 0.5 0"></a-box>
+            </a-nft>
             <a-entity camera></a-entity>
         </a-scene>
     </body>
