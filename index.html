@@ -8,7 +8,7 @@
     <body>
         <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: true;">
             <a-nft url="./nft/nft" smooth="true">
-                <!-- <a-plane
+                <a-plane
                     position="-0.5 -0.5 0"
                     rotation="-90 0 0"
                     width="0.5"
@@ -18,83 +18,83 @@
                     event-set__click="_event: click; color: #00ccff"
                     onclick="window.open('https://t.me/Newgentle', '_blank')"
                 >
-                </a-plane> -->
-                <!--         <a-text
-          value="Telegram"
-          position="-1 0.7 0.01"
-          scale="0.5 0.5 0.5"
-          color="#ffffff"
-        ></a-text>
- -->
+                </a-plane>
+                <a-text
+                    value="Telegram"
+                    position="-1 0.7 0.01"
+                    scale="0.5 0.5 0.5"
+                    color="#ffffff"
+                ></a-text>
+
                 <!-- 2D Плоскость для WhatsApp -->
-                <!--         <a-plane
-          position="0 0.5 0"
-          width="1.5"
-          height="0.5"
-          color="#25D366"
-          material="shader: flat"
-          event-set__click="_event: click; color: #50e085"
-          onclick="window.open('https://wa.me/1234567890', '_blank')"
-        >
-        </a-plane>
-        <a-text
-          value="WhatsApp"
-          position="0 0.7 0.01"
-          scale="0.5 0.5 0.5"
-          color="#ffffff"
-        ></a-text> -->
+                <a-plane
+                    position="0 0.5 0"
+                    width="1.5"
+                    height="0.5"
+                    color="#25D366"
+                    material="shader: flat"
+                    event-set__click="_event: click; color: #50e085"
+                    onclick="window.open('https://wa.me/1234567890', '_blank')"
+                >
+                </a-plane>
+                <a-text
+                    value="WhatsApp"
+                    position="0 0.7 0.01"
+                    scale="0.5 0.5 0.5"
+                    color="#ffffff"
+                ></a-text>
 
                 <!-- 2D Плоскость для звонка -->
-                <!--         <a-plane
-          position="1 0.5 0"
-          width="1.5"
-          height="0.5"
-          color="#ff0000"
-          material="shader: flat"
-          event-set__click="_event: click; color: #ff5050"
-          onclick="window.open('tel:+1234567890', '_blank')"
-        >
-        </a-plane>
-        <a-text
-          value="Call"
-          position="1 0.7 0.01"
-          scale="0.5 0.5 0.5"
-          color="#ffffff"
-        ></a-text> -->
+                <a-plane
+                    position="1 0.5 0"
+                    width="1.5"
+                    height="0.5"
+                    color="#ff0000"
+                    material="shader: flat"
+                    event-set__click="_event: click; color: #ff5050"
+                    onclick="window.open('tel:+1234567890', '_blank')"
+                >
+                </a-plane>
+                <a-text
+                    value="Call"
+                    position="1 0.7 0.01"
+                    scale="0.5 0.5 0.5"
+                    color="#ffffff"
+                ></a-text>
 
                 <!-- 2D Плоскость с фото -->
-                <!-- <a-image
+                <a-image
                     id="image1"
                     position="0 -0.5 0"
                     rotation="-90 0 0"
                     width="0.5"
                     height="0.5"
                     src="https://cdn.glitch.global/fd29b778-4723-4fa7-a606-70ad55f37f0e/Yodgora.png?v=1729422697726"
-                ></a-image> -->
+                ></a-image>
 
                 <!-- Имя -->
-                <!--         <a-text
-          value="Your Name"
-          position="0 -1.4 0.01"
-          scale="1 1 1"
-          color="#000000"
-        ></a-text> -->
+                <a-text
+                    value="Your Name"
+                    position="0 -1.4 0.01"
+                    scale="1 1 1"
+                    color="#000000"
+                ></a-text>
 
                 <!-- Должность -->
-                <!--         <a-text
-          value="Your Job Title"
-          position="0 -1.7 0.01"
-          scale="0.8 0.8 0.8"
-          color="#000000"
-        ></a-text> -->
+                <a-text
+                    value="Your Job Title"
+                    position="0 -1.7 0.01"
+                    scale="0.8 0.8 0.8"
+                    color="#000000"
+                ></a-text>
 
                 <!-- Название компании -->
-                <!--         <a-text
-          value="Your Company"
-          position="0 -2 0.01"
-          scale="0.8 0.8 0.8"
-          color="#000000"
-        ></a-text> -->
+                <a-text
+                    value="Your Company"
+                    position="0 -2 0.01"
+                    scale="0.8 0.8 0.8"
+                    color="#000000"
+                ></a-text>
                 <a-box position="0 0.5 0"></a-box>
             </a-nft>
             <a-entity camera></a-entity>
