@@ -6,13 +6,12 @@
     </head>
     <body>
         <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;">
-            <!--       <a-marker
-        type="nft" url="Assets/nft" smooth="true" smoothсount="10" smoothеolerance="0.01" smoothеhreshold="0.05"
-      > -->
             <a-nft
-                
                 url="./nft/nft"
-                
+                smooth="true"
+                smoothCount="10"
+                smoothTolerance="0.01"
+                smoothThreshold="0.05"
             >
                 <a-plane
                     position="-0.5 -0.5 0"
@@ -22,7 +21,8 @@
                     color="#0088cc"
                     material="shader: flat"
                     event-set__click="_event: click; color: #00ccff"
-                    onclick="window.open('https://t.me/Newgentle', '_blank')" >
+                    onclick="window.open('https://t.me/Newgentle', '_blank')"
+                >
                 </a-plane>
                 <!--         <a-text
           value="Telegram"
