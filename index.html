@@ -6,7 +6,12 @@
         <!-- <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js@master/aframe/build/aframe-ar.js"></script> -->
     </head>
     <body>
-        <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: true;">
+        <a-scene
+            vr-mode-ui="enabled: false;"
+            renderer="logarithmicDepthBuffer: true;"
+            embedded
+            arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: true;"
+        >
             <a-nft type="nft" url="./nft/nft" smooth="true">
                 <a-plane
                     position="-0.5 -0.5 0"
@@ -95,7 +100,7 @@
                     scale="0.8 0.8 0.8"
                     color="#000000"
                 ></a-text>
-                <a-box position="0 0.5 0"></a-box>
+                <a-box position="5 150 0"></a-box>
             </a-nft>
             <a-entity camera></a-entity>
         </a-scene>
