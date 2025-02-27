@@ -1,19 +1,40 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <title>vCard AR with MindAR</title>
-  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
-</head>
-<body>
-  <a-scene mindar-image="imageTargetSrc: ./targets.mind;" embedded color-space="sRGB" renderer="colorManagement: true" vr-mode-ui="enabled" device-orientation-permission-ui="enabled">
-    <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
-    <a-entity mindar-image-target="targetIndex: 0">
-      <a-plane position="0 0 0" height="0.5" width="1" material="color: #ffffff; opacity: 0.9">
-        <a-text value="John Doe\nSoftware Engineer\njohn.doe@example.com\n555-123-4567" align="center" color="black" width="0.9" position="0 0 0.01"></a-text>
-      </a-plane>
-    </a-entity>
-  </a-scene>
-</body>
+	<head>
+		<meta charset="utf-8" />
+		<title>vCard AR with MindAR</title>
+		<script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+	</head>
+	<body>
+		<a-scene
+			mindar-image="imageTargetSrc: ./targets.mind; filterMinCF:0.0001; filterBeta: 0.001;"
+			embedded
+			color-space="sRGB"
+			renderer="colorManagement: true, antialias: true"
+			vr-mode-ui="enabled"
+			device-orientation-permission-ui="enabled"
+		>
+			<a-camera
+				position="0 0 0"
+				look-controls="enabled: false"
+			></a-camera>
+			<a-entity mindar-image-target="targetIndex: 0">
+				<a-plane
+					position="0 0 0"
+					height="0.5"
+					width="1"
+					material="color: #ffffff; opacity: 0.9"
+				>
+					<a-text
+						value="John Doe\nSoftware Engineer\njohn.doe@example.com\n555-123-4567"
+						align="center"
+						color="black"
+						width="0.9"
+						position="0 0 0.01"
+					></a-text>
+				</a-plane>
+			</a-entity>
+		</a-scene>
+	</body>
 </html>
