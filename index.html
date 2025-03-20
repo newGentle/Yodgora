@@ -1,126 +1,75 @@
-<html>
-  <head>
-    <!-- Import Modules -->
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/dist/mindar-image.prod.js"></script>
-    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/dist/mindar-image-aframe.prod.js"></script>
-<!--     <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/dist/mindar-image-aframe.prod.js"></script> -->
-    <script src="./look-controls.js"></script>
-    
-    <!-- Click Handlers -->
-    <script>
-      AFRAME.registerComponent('play-pause', {
-        init: function () {
-          var myVideo = document.querySelector('#intro');
-          var videoControl = document.querySelector('#videoControl');
-          this.el.addEventListener('click', function () {
-            if (myVideo.paused) {
-                myVideo.play();
-                videoControl.setAttribute('src', '#pause');
-            } else {
-              myVideo.pause();
-              videoControl.setAttribute('src', '#play');
-            }
-          });
-          
-        }
-      });
-    </script>
-    <script>
-      document.addEventListener("DOMContentLoaded", function() {
-	    const sceneEl = document.querySelector('a-scene');
-	    const arSystem = sceneEl.systems["mindar-image-system"];
-      // detect click event
-    const CenterText = document.querySelector('#CenterText');
-      CenterText.addEventListener("click", event => {
-        console.log("Center Text click");
-        window.open('https://instagram.com/chrisvanndy');
-      });
-      const LeftText = document.querySelector('#LeftText');
-      LeftText.addEventListener("click", event => {
-        console.log("Left Text click");
-        window.open('https://www.linkedin.com/in/chrisvanndy/');
-      });
-      const RightText = document.querySelector('#RightText');
-      RightText.addEventListener("click", event => {
-        console.log("Right Text click");
-        window.open('https://opensea.io/collection/headinthecloudsdigitalshopper');
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Визитная карта с Babylon.js</title>
+  <script src="https://cdn.babylonjs.com/babylon.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@babylonjs/core"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@babylonjs/loaders"></script>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      width: 100%;
+      height: 100%;
+    }
+    canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="renderCanvas"></canvas>
+  <script>
+    // Инициализация Babylon.js
+    const canvas = document.getElementById("renderCanvas");
+    const engine = new BABYLON.Engine(canvas, true);
 
+    // Создание сцены
+    const createScene = async () => {
+      const scene = new BABYLON.Scene(engine);
+      scene.clearColor = new BABYLON.Color3(0, 0, 0);
+
+      // Настройка камеры
+      const camera = new BABYLON.ArcRotateCamera("camera", Math.PI / 2, Math.PI / 4, 2, BABYLON.Vector3.Zero(), scene);
+      camera.attachControl(canvas, true);
+
+      // Освещение
+      const light = new BABYLON.HemisphericLight("light", new BABYLON.Vector3(0, 1, 0), scene);
+      light.intensity = 0.7;
+
+      // Создание плоскости для фото
+      const photoPlane = BABYLON.MeshBuilder.CreatePlane("photo", { width: 1, height: 1 }, scene);
+      photoPlane.position.x = 1.5; // Расположение справа от маркера
+      const photoMaterial = new BABYLON.StandardMaterial("photoMaterial", scene);
+      photoMaterial.diffuseTexture = new BABYLON.Texture("photo.jpg", scene); // Загрузка фотографии
+      photoPlane.material = photoMaterial;
+
+      // Создание плоскости для текста
+      const textPlane = BABYLON.MeshBuilder.CreatePlane("text", { width: 1, height: 1 }, scene);
+      textPlane.position.x = -1.5; // Расположение слева от маркера
+      const textMaterial = new BABYLON.StandardMaterial("textMaterial", scene);
+      textMaterial.diffuseTexture = new BABYLON.Texture("text.png", scene); // Текст как изображение
+      textPlane.material = textMaterial;
+
+      return scene;
+    };
+
+    // Запуск сцены
+    createScene().then(scene => {
+      engine.runRenderLoop(() => {
+        scene.render();
       });
     });
-    </script>
-    
-  </head>
-  <body>
 
-    <a-scene mindar-image="imageTargetSrc: ./targets.mind" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
-      
-      <!-- Assets -->
-      <a-assets>
-
-        <!-- 3D Assets -->
-        <a-asset-item id="artBag" src="./Assets/ArtBagMask(3).obj"></a-asset-item>
-        <a-asset-item id="cloudBag" src="./Assets/Head_in_the_clouds(1).obj"></a-asset-item>
-        <a-asset-item id="robot" src="./Assets/VanndyVR.obj"></a-asset-item>
-        <!-- UI/2D Assets -->
-        <img id="card" src="./Assets/card.jpg"/>
-        <a-asset-item id= "avatarModel" src="./Assets/Cube.gltf"></a-asset-item>
-        <video id="intro" loop="true" src="./Assets/sizzle.mp4"></video>
-        <video id="disco" loop="true" src="./Assets/DISCODISCO.mp4"></video>
-        <image id="play" src="./Assets/play.png"></image>
-        <image id="pause" src="./Assets/pause.png"></image>
-
-      </a-assets>
-
-      <!--- Camera Component -->
-      <a-camera position="0 0 0" look-controls="enabled: false" cursor="fuse: false; rayOrigin: mouse;" raycaster="far: ${customFields.libVersion}; objects: .clickable"></a-camera>
-
-      <!-- Place on Target when found-->
-      <a-entity mindar-image-target="targetIndex: 0">
-
-        <a-plane src="#card" position="0 0 0" height="0.552" width="1" rotation="0 0 0"></a-plane>
-
-        <!-- Video Component -->
-        <a-video src="#intro" width="1.5" height="1" position="0 .6 .5" rotation="130  180 180" >
-          <a-image class="clickable" id="videoControl" src="#play" position="0 .7 0" scale=".5 .5 .5" rotation="20 0 0" play-pause></a-image>
-        </a-video>
-        
-        <!-- Cylidners -->
-        <a-entity geometry="primitive: cylinder" scale=".16 .16 .16" rotation="90 0 0" position="0 0 0" 
-          material="color:#FCCD0E" animation="property: position; from: 0 0 0; to: 0 0 .1; loop: false; dur: 5000">
-            
-          <a-obj-model src="#artBag" mtl="#artBag" scale="1.4 1.4 1.4" rotation="-30 0 0" position="-.25 1.6 0"
-            material="color: black" >
-          </a-obj-model>
-        </a-entity>
-
-        <a-entity geometry="primitive: cylinder"  scale=".14 .14 .14" rotation="90 0 0" position="-.3 0 .05" material="color:#545452"
-          animation="property: position; from: 0 0 0; to: -.3 0 .05; loop: false; dur: 5000">
-         
-          <a-obj-model src="#cloudBag" mtl="#cloudBag" scale="1 1 1" rotation="-30 0 0" position="-.4 -.7 .9"></a-obj-model>
-        </a-entity>
-
-        <a-entity geometry="primitive: cylinder"  scale=".14 .14 .14" rotation="90 0 0" position=".3 0 .05" material="color:#545452"
-         animation="property: position; from: 0 0 0; to: .3 0 .05; loop: false; dur: 5000">
-          
-          <a-obj-model src="#robot" mtl="#robot" scale="1.25 1.25 1.25" rotation="0 270 30" position="0 2.4 -.4"></a-obj-model>
-        </a-entity>
-
-        <!-- Text Planes -->
-        <a-text id="CenterText" class="clickable" value="Instagram" align="center" scale=".2 .2 .2"
-          color="#FFF" visible="true" position="0 -.21 .01" rotation="0 0 0"
-          geometry="primitive: plane; width:1.2 opacity: 5" material="color: #000000"></a-text>
-
-        <a-text id="LeftText" class="clickable" value="LinkedIn" align="center" scale=".2 .2 .2"
-            color="#FFF" visible="true" position=".3 -.21 .01" rotation="0 0 0"
-            geometry="primitive: plane; width: 1.2 opacity: 5" material="color: #000000"></a-text>
-           
-        <a-text id="RightText" class="clickable" value="OpenSea" align="center" scale=".2 .2 .2"
-            color="#FFF" visible="true" position="-.3 -.21 .01" rotation="0 0 0"
-            geometry="primitive: plane; width: 1.2 opacity: 5" material="color: #000000"></a-text>
-      
-      </a-entity>
-    </a-scene>
-  </body>
+    // Адаптация к размеру окна
+    window.addEventListener("resize", () => {
+      engine.resize();
+    });
+  </script>
+</body>
 </html>
